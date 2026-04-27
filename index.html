@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>大方云图 - 驾驶未来 · 全新出行</title>
+    <meta name="description" content="大方云图 - 科技引领·驾驶无界·自在出行·解放双手">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * { 
+            -webkit-tap-highlight-color: transparent; 
+            box-sizing: border-box; 
+        }
+        
+        body {
+            font-family: 'MiSans', 'Montserrat', 'Aidian FengYaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            background-color: #000;
+            padding-bottom: 80px;
+        }
+        
+        ::-webkit-scrollbar { width: 0; height: 0; }
+        
+        /* 顶部导航栏 */
+        .nav-bar {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* ===== Hero = 智能出行 ===== */
+        .hero-section {
+            position: relative;
+            min-height: 50vh;
+            background: url('images/hero-bg.avif') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 24px 60px;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+        }
+        
+        .hero-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 40px rgba(100,179,244,0.5));
+        }
+        
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            letter-spacing: 6px;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 16px;
+            letter-spacing: 4px;
+        }
+        
+        .hero-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+        
+        /* Hero 文字渐显动画 */
+        .hero-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 0.8s ease forwards;
+        }
+        
+        .hero-fade-in-delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .hero-fade-in-delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .hero-fade-in-delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 28px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 24px;
+            color: white;
+            font-size: 14px;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:active {
+            background: rgba(255,255,255,0.25);
+        }
+        
+        /* ===== 数智企业 ===== */
+        .enterprise-section {
+            position: relative;
+            min-height: 50vh;
+            background: url('images/enterprise-bg.avif') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 24px;
+            overflow: hidden;
+        }
+        
+
+        
+        .enterprise-content {
+            position: relative;
+            z-index: 10;
+            max-width: 400px;
+        }
+        
+        .enterprise-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .enterprise-subtitle {
+            font-size: 16px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 6px;
+        }
+        
+        .enterprise-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 24px;
+        }
+        
+        /* ===== 四大核心技术 ===== */
+        .tech-section {
+            position: relative;
+            background: linear-gradient(180deg, #0a1628 0%, #1a2332 100%);
+            padding: 32px 16px;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .tech-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .tech-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+        
+        .tech-subtitle {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: calc(100% - 32px);
+            max-width: 400px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        
+        .tech-item {
+            position: relative;
+            aspect-ratio: 16/10;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 12px;
+            text-decoration: none;
+            background-size: cover;
+            background-position: center;
+            min-height: 100px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .tech-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+        
+        .tech-number {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            z-index: 2;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 10px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+        }
+        
+        .tech-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tech-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+        
+        .tech-name-en {
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+        }
+        
+        /* ===== 标语区 ===== */
+        .slogan-section {
+            background: #F8F8FF;
+            padding: 40px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slogan-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slogan-brand {
+            font-size: 85px;
+            font-weight: 700;
+            color: rgba(241, 241, 249, 0.4);
+            letter-spacing: 8px;
+            margin-bottom: -20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .slogan-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 4px;
+            margin-bottom: 24px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #444;
+            font-size: 12px;
+        }
+
+        .contact-item i {
+            width: 14px;
+            height: 14px;
+            color: #2997ff;
+        }
+        
+        /* ===== 底部导航 ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 22, 40, 0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 50;
+        }
+        
+        .nav-item { 
+            color: rgba(255,255,255,0.5); 
+            transition: all 0.2s ease; 
+            text-decoration: none;
+        }
+        .nav-item.active { 
+            color: #64b3f4; 
+        }
+        
+        /* 侧边菜单 */
+        .side-menu {
+            background: rgba(10, 22, 40, 0.98);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .pb-safe { 
+            padding-bottom: env(safe-area-inset-bottom, 20px); 
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-bar">
+        <div class="flex items-center justify-between px-4 h-12">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="images/logo.svg" alt="大方云图" class="w-6 h-6">
+                <span class="font-semibold text-white text-base">大方云图</span>
+            </a>
+            <button id="menuBtn" class="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                <i data-lucide="menu" class="w-5 h-5 text-white"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 侧边菜单 -->
+    <div id="sideMenu" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80" id="menuOverlay"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-72 side-menu transform translate-x-full transition-transform duration-300" id="menuContent">
+            <div class="p-4 border-b border-white/10 flex items-center justify-between">
+                <span class="font-semibold text-white">菜单</span>
+                <button id="closeMenu" class="p-2 rounded-lg hover:bg-white/10">
+                    <i data-lucide="x" class="w-5 h-5 text-white"></i>
+                </button>
+            </div>
+            <div class="p-4 space-y-1">
+                <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="home" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">首页</span>
+                </a>
+                <a href="smart-travel.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="car" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">智能出行</span>
+                </a>
+                <a href="enterprise.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="building-2" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">数智企业</span>
+                </a>
+                <a href="about.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="info" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">关于大方</span>
+                </a>
+                <a href="contact.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="phone" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">联系我们</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Hero = 智能出行 ===== -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title hero-fade-in">驾驶未来</h1>
+            <p class="hero-subtitle hero-fade-in hero-fade-in-delay-1">全新出行</p>
+            <p class="hero-desc hero-fade-in hero-fade-in-delay-2">科技引领 · 驾驶无界 · 自在出行 · 解放双手</p>
+            <a href="smart-travel.html" class="btn-primary hero-fade-in hero-fade-in-delay-3">
+                了解更多 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== 数智企业 ===== -->
+    <section class="enterprise-section">
+        <div class="enterprise-content">
+            <h2 class="enterprise-title">数智企业</h2>
+            <p class="enterprise-subtitle">助力企业 · 数智升级</p>
+            <p class="enterprise-desc">海量人地大数据，赋能决策</p>
+            <a href="enterprise.html" class="btn-primary">
+                了解更多 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== 四大核心技术 ===== -->
+    <section class="tech-section">
+        <div class="tech-header">
+            <h2 class="tech-title">聚焦四大核心技术</h2>
+            <p class="tech-subtitle">定位 · 导航 · 地图 · 路线</p>
+        </div>
+        <div class="tech-grid">
+            <a href="about.html" class="tech-item" style="background-image: url('images/tech-01.avif');">
+                <span class="tech-number">01</span>
+                <div class="tech-content">
+                    <div class="tech-name">定位</div>
+                    <div class="tech-name-en">Positioning</div>
+                </div>
+            </a>
+            <a href="about.html" class="tech-item" style="background-image: url('images/tech-02.avif');">
+                <span class="tech-number">02</span>
+                <div class="tech-content">
+                    <div class="tech-name">导航</div>
+                    <div class="tech-name-en">Navigation</div>
+                </div>
+            </a>
+            <a href="about.html" class="tech-item" style="background-image: url('images/tech-03.avif');">
+                <span class="tech-number">03</span>
+                <div class="tech-content">
+                    <div class="tech-name">地图</div>
+                    <div class="tech-name-en">Map</div>
+                </div>
+            </a>
+            <a href="about.html" class="tech-item" style="background-image: url('images/tech-04.avif');">
+                <span class="tech-number">04</span>
+                <div class="tech-content">
+                    <div class="tech-name">路线</div>
+                    <div class="tech-name-en">Route</div>
+                </div>
+            </a>
+        </div>
+        <div class="text-center mt-5">
+            <a href="about.html" class="btn-primary">
+                了解更多 <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== 标语区 ===== -->
+    <section class="slogan-section">
+        <div class="slogan-content">
+            <div class="slogan-brand">DAFANG</div>
+            <p class="slogan-text">始于信任 · 成于技术</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i data-lucide="map-pin"></i>
+                    <span>北京市朝阳区利泽中园106号楼2层213</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="phone"></i>
+                    <span>131 2116 2261</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="mail"></i>
+                    <span>Dfpublic@dafangyuntu.com</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 底部导航栏 ===== -->
+    <nav class="bottom-nav pb-safe">
+        <div class="flex items-center justify-around h-16">
+            <a href="index.html" class="nav-item active flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="home" class="w-6 h-6"></i>
+                <span class="text-[11px]">首页</span>
+            </a>
+            <a href="smart-travel.html" class="nav-item flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="car" class="w-6 h-6"></i>
+                <span class="text-[11px]">出行</span>
+            </a>
+            <a href="enterprise.html" class="nav-item flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="building-2" class="w-6 h-6"></i>
+                <span class="text-[11px]">企业</span>
+            </a>
+            <a href="about.html" class="nav-item flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="info" class="w-6 h-6"></i>
+                <span class="text-[11px]">关于</span>
+            </a>
+            <a href="contact.html" class="nav-item flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="phone" class="w-6 h-6"></i>
+                <span class="text-[11px]">联系</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+        
+        // 菜单控制
+        const menuBtn = document.getElementById('menuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuContent = document.getElementById('menuContent');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const closeMenu = document.getElementById('closeMenu');
+        
+        function openMenu() {
+            sideMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => { menuContent.classList.remove('translate-x-full'); }, 10);
+        }
+        
+        function closeMenuFn() {
+            menuContent.classList.add('translate-x-full');
+            setTimeout(() => { sideMenu.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
+        }
+        
+        menuBtn.addEventListener('click', openMenu);
+        closeMenu.addEventListener('click', closeMenuFn);
+        menuOverlay.addEventListener('click', closeMenuFn);
+        document.querySelectorAll('#sideMenu a').forEach(link => { link.addEventListener('click', closeMenuFn); });
+    </script>
+</body>
+</html>

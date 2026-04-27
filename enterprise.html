@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数智企业 - 大方云图</title>
+    <meta name="description" content="大方云图数智企业解决方案 - 企业地图、室内地图、新能源充电站选址">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+
+        body {
+            font-family: 'MiSans', 'Montserrat', 'Aidian FengYaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            background-color: #000;
+        }
+
+        ::-webkit-scrollbar { width: 0; height: 0; }
+
+        .nav-bar {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 50vh;
+            background: url('images/enterprise-bg.avif') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 24px 60px;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .hero-content { position: relative; z-index: 10; }
+        .hero-tag { font-size: 14px; color: #2997ff; margin-bottom: 16px; letter-spacing: 2px; }
+        .hero-title { font-size: 36px; font-weight: 700; color: white; margin-bottom: 16px; }
+        .hero-desc { font-size: 18px; color: rgba(255,255,255,0.7); }
+        
+        /* Hero 文字渐显动画 */
+        .hero-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 0.8s ease forwards;
+        }
+        
+        .hero-fade-in-delay-1 { animation-delay: 0.2s; }
+        .hero-fade-in-delay-2 { animation-delay: 0.4s; }
+        .hero-fade-in-delay-3 { animation-delay: 0.6s; }
+        
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-card { position: relative; padding: 40px 24px; background: #000; }
+        .section-card-alt { background: linear-gradient(180deg, #1764FF 0%, #0035A1 44%, #00143D 100%); }
+
+        /* 企业地图背景 - 模仿PC端中间亮两边暗的渐变 */
+        .enterprise-map-section {
+            position: relative;
+            padding: 40px 24px;
+            background: radial-gradient(ellipse 100% 100% at 50% 0%, #1a5fff 0%, #0d3a9c 40%, #051a4a 100%);
+            overflow: hidden;
+        }
+
+        .section-header { text-align: center; margin-bottom: 24px; }
+        .section-icon { width: 48px; height: 48px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+        .section-title { font-size: 24px; font-weight: 700; color: white; margin-bottom: 8px; }
+        .section-subtitle { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; white-space: nowrap; }
+
+        /* 8个功能卡片 - PC端风格：蓝色半透明背景+白色图标 */
+        .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .feature-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px 6px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        .feature-item:active {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(0.98);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+        }
+        .feature-icon i { color: rgba(255, 255, 255, 0.9); }
+        .feature-title { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.9); }
+
+        /* 行业解决方案轮播 - PC端风格 */
+        .solution-carousel-container {
+            position: relative;
+            overflow: hidden;
+            margin: 0 16px;
+        }
+
+        .solution-carousel-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .solution-slide {
+            min-width: 100%;
+            padding: 0 4px;
+        }
+
+        .solution-card-pc {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+            border: 1px solid rgba(71, 85, 105, 0.4);
+            border-radius: 16px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .solution-card-pc {
+            position: relative;
+        }
+
+        .solution-card-images {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+            border-radius: 0 16px 0 0;
+            overflow: hidden;
+        }
+
+        .solution-card-images img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top right;
+            transition: opacity 0.3s ease;
+        }
+
+        .solution-card-content {
+            padding: 24px 20px 24px 24px;
+            flex: 1;
+        }
+
+        .solution-img-default {
+            opacity: 1;
+        }
+
+        .solution-img-hover {
+            opacity: 0;
+        }
+
+        .solution-card-pc:hover .solution-img-default {
+            opacity: 0;
+        }
+
+        .solution-card-pc:hover .solution-img-hover {
+            opacity: 1;
+        }
+
+        /* 左侧装饰条 */
+        .solution-card-pc::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #38bdf8 0%, #6366f1 100%);
+        }
+
+        /* 右上角光晕 */
+        .solution-card-pc::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .solution-card-content {
+            padding: 24px 20px 24px 24px;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .solution-card-indicator {
+            width: 24px;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8 0%, #6366f1 100%);
+            border-radius: 2px;
+            margin-bottom: 16px;
+        }
+
+        .solution-slide-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .solution-label {
+            font-size: 12px;
+            color: rgba(148, 163, 184, 0.8);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .solution-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .solution-tag {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 5px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .solution-tag:hover {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .solution-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.3) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 100%);
+            margin-bottom: 16px;
+        }
+
+        .solution-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .solution-features li {
+            font-size: 13px;
+            color: rgba(226, 232, 240, 0.8);
+            line-height: 1.8;
+            margin-bottom: 10px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .solution-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 5px;
+            height: 5px;
+            background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+            border-radius: 50%;
+        }
+
+        .solution-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        .solution-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .solution-dot.active {
+            background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* 充电站特色卡片 */
+        .charging-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 0 16px;
+        }
+
+        .charging-card {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .charging-card:active {
+            background: rgba(34,197,94,0.15);
+            transform: scale(0.98);
+        }
+
+        .charging-card-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(34,197,94,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+
+        .charging-card-icon i {
+            color: #4ade80;
+        }
+
+        .charging-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .charging-card-desc {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ===== 标语区 ===== */
+        .slogan-section {
+            background: #F8F8FF;
+            padding: 40px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slogan-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slogan-brand {
+            font-size: 85px;
+            font-weight: 700;
+            color: rgba(241, 241, 249, 0.4);
+            letter-spacing: 8px;
+            margin-bottom: -20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .slogan-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 4px;
+            margin-bottom: 24px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #444;
+            font-size: 12px;
+        }
+
+        .contact-item i {
+            width: 14px;
+            height: 14px;
+            color: #2997ff;
+        }
+
+        .bottom-nav { background: rgba(29, 29, 31, 0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .nav-item { color: rgba(255,255,255,0.5); transition: all 0.2s ease; }
+        .nav-item.active { color: #2997ff; }
+        .side-menu { background: rgba(29, 29, 31, 0.98); box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5); }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-bar">
+        <div class="flex items-center justify-between px-4 h-12">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="images/logo.svg" alt="大方云图" class="w-6 h-6">
+                <span class="font-semibold text-white text-base">大方云图</span>
+            </a>
+            <button id="menuBtn" class="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                <i data-lucide="menu" class="w-5 h-5 text-white"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 侧边菜单 -->
+    <div id="sideMenu" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80" id="menuOverlay"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-72 side-menu transform translate-x-full transition-transform duration-300" id="menuContent">
+            <div class="p-4 border-b border-white/10 flex items-center justify-between">
+                <span class="font-semibold text-white">菜单</span>
+                <button id="closeMenu" class="p-2 rounded-lg hover:bg-white/10">
+                    <i data-lucide="x" class="w-5 h-5 text-white"></i>
+                </button>
+            </div>
+            <div class="p-4 space-y-1">
+                <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="home" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">首页</span>
+                </a>
+                <a href="smart-travel.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="car" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">智能出行</span>
+                </a>
+                <a href="enterprise.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="building-2" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">数智企业</span>
+                </a>
+                <a href="about.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="info" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">关于大方</span>
+                </a>
+                <a href="contact.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="phone" class="w-5 h-5 text-white"></i>
+                    <span class="text-white font-medium">联系我们</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero 区域 -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title hero-fade-in">助力企业<br>数智升级</h1>
+            <p class="hero-desc hero-fade-in hero-fade-in-delay-1">海量人地大数据 定制化开发企业服务</p>
+        </div>
+    </section>
+
+    <!-- 企业地图 -->
+    <section class="enterprise-map-section">
+        <div class="section-header" style="position: relative; z-index: 1;">
+            <h2 class="section-title">企业地图</h2>
+            <p class="section-subtitle">解决企业与地图相关的所有问题</p>
+        </div>
+
+        <!-- 8大功能 -->
+        <div class="feature-grid" style="position: relative; z-index: 1;">
+            <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="map" class="w-4 h-4 text-white"></i></div>
+                <div class="feature-title">区域规划</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="store" class="w-4 h-4 text-white"></i></div>
+                <div class="feature-title">网店管理</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="route" class="w-4 h-4 text-white"></i></div>
+                <div class="feature-title">路线规划</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="bar-chart-3" class="w-4 h-4 text-white"></i></div>
+                <div class="feature-title">经营数据</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="pie-chart" class="w-4 h-4 text-white"></i></div>
+                <div class="feature-title">数据分析</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="eye" class="w-4 h-4 text-white"></i></div>
+                <div class="feature-title">位置监控</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="alert-triangle" class="w-4 h-4 text-white"></i></div>
+                <div class="feature-title">风险预警</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="shield" class="w-4 h-4 text-white"></i></div>
+                <div class="feature-title">权限管理</div>
+            </div>
+        </div>
+
+        <!-- 行业解决方案轮播 -->
+        <div class="solution-carousel-wrapper" style="margin-top: 40px; position: relative; z-index: 1;">
+            <div class="section-header" style="margin-bottom: 24px;">
+                <h3 style="font-size: 20px; font-weight: 600; color: white; margin-bottom: 8px;">行业解决方案</h3>
+                <p style="font-size: 14px; color: rgba(255,255,255,0.6);">企业地图可以为您解决</p>
+            </div>
+            <div class="solution-carousel-container" id="solutionCarouselContainer">
+                <div class="solution-carousel-track" id="solutionCarouselTrack">
+                    <!-- 方案1: 智能派单系统 -->
+                    <div class="solution-slide" data-index="0">
+                        <div class="solution-card-pc" onmouseenter="showSolutionHover(0)" onmouseleave="hideSolutionHover(0)">
+                            <div class="solution-card-images">
+                                <img src="images/3-top-1.png" class="solution-img-default" id="solutionImg0" alt="智能派单">
+                                <img src="images/3-top-1-hover.png" class="solution-img-hover" id="solutionImgHover0" alt="智能派单悬停">
+                            </div>
+                            <div class="solution-card-content">
+                                <div class="solution-card-indicator"></div>
+                                <div class="solution-slide-title">智能派单系统</div>
+                                <div class="solution-label">适用企业</div>
+                                <div class="solution-tags">
+                                    <span class="solution-tag">3C家电</span>
+                                    <span class="solution-tag">本地生活</span>
+                                    <span class="solution-tag">装备制造</span>
+                                </div>
+                                <div class="solution-divider"></div>
+                                <ul class="solution-features">
+                                    <li>维修需求实时看板:可视化展示各省市待处理工单、紧急程度分级</li>
+                                    <li>智能派单引擎:根据工程师定位、技能标签、当前负荷自动分配最优工单</li>
+                                    <li>数据决策支持:维修耗时TOP分析、配件损耗统计等</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 方案2: 货车物流系统 -->
+                    <div class="solution-slide" data-index="1">
+                        <div class="solution-card-pc" onmouseenter="showSolutionHover(1)" onmouseleave="hideSolutionHover(1)">
+                            <div class="solution-card-images">
+                                <img src="images/3-top-2.png" class="solution-img-default" id="solutionImg1" alt="货车物流">
+                                <img src="images/3-top-2-hover.png" class="solution-img-hover" id="solutionImgHover1" alt="货车物流悬停">
+                            </div>
+                            <div class="solution-card-content">
+                                <div class="solution-card-indicator"></div>
+                                <div class="solution-slide-title">货车物流系统</div>
+                                <div class="solution-label">适用企业</div>
+                                <div class="solution-tags">
+                                    <span class="solution-tag">第三方物流公司</span>
+                                    <span class="solution-tag">冷链/危化品等特殊运输</span>
+                                </div>
+                                <div class="solution-divider"></div>
+                                <ul class="solution-features">
+                                    <li>智能调度:根据货车装载情况、目的地等安排车辆调度</li>
+                                    <li>动态路径规划:实时避让拥堵路段,油耗降低15%以上</li>
+                                    <li>车辆偏离预设路线时自动触发告警</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 方案3: 经营大盘系统 -->
+                    <div class="solution-slide" data-index="2">
+                        <div class="solution-card-pc" onmouseenter="showSolutionHover(2)" onmouseleave="hideSolutionHover(2)">
+                            <div class="solution-card-images">
+                                <img src="images/3-top-3.png" class="solution-img-default" id="solutionImg2" alt="经营大盘">
+                                <img src="images/3-top-3-hover.png" class="solution-img-hover" id="solutionImgHover2" alt="经营大盘悬停">
+                            </div>
+                            <div class="solution-card-content">
+                                <div class="solution-card-indicator"></div>
+                                <div class="solution-slide-title">经营大盘系统</div>
+                                <div class="solution-label">适用企业</div>
+                                <div class="solution-tags">
+                                    <span class="solution-tag">跨区域经营的连锁企业</span>
+                                    <span class="solution-tag">集团分子公司管理</span>
+                                </div>
+                                <div class="solution-divider"></div>
+                                <ul class="solution-features">
+                                    <li>多维度数据融合:财务、人力、运营数据一键关联分析</li>
+                                    <li>预警雷达系统:关键指标异常自动标红</li>
+                                    <li>移动端适配:高管可随时通过手机查看实时经营热力图</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="solution-dots" id="solutionCarouselDots">
+                <div class="solution-dot active" data-index="0"></div>
+                <div class="solution-dot" data-index="1"></div>
+                <div class="solution-dot" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 室内地图 -->
+    <section class="section-card" style="background: linear-gradient(180deg, #f5f7fa 0%, #e8e8ed 100%);">
+        <div class="section-header">
+            <h2 class="section-title" style="color: #1a1a1a;">高标室内地图</h2>
+            <p class="section-subtitle" style="color: #666;">精准室内定位与导航服务</p>
+        </div>
+
+        <!-- 地图对比展示 -->
+        <div class="indoor-map-compare" style="margin: 0 16px;">
+            <!-- 切换标签 -->
+            <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                <div id="indoorTab1" onclick="switchIndoorMap(0)" style="flex: 1; text-align: center; padding: 12px; background: rgba(56, 189, 248, 0.15); border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3); cursor: pointer; transition: all 0.3s;">
+                    <span style="font-size: 14px; font-weight: 600; color: #2997ff;">高标室内地图</span>
+                </div>
+                <div id="indoorTab2" onclick="switchIndoorMap(1)" style="flex: 1; text-align: center; padding: 12px; background: rgba(0, 0, 0, 0.05); border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.1); cursor: pointer; transition: all 0.3s;">
+                    <span style="font-size: 14px; color: #666;">普通地图</span>
+                </div>
+            </div>
+
+            <!-- 图片轮播 -->
+            <div style="position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+                <div id="indoorMapSlider" style="display: flex; transition: transform 0.4s ease;">
+                    <div style="min-width: 100%;">
+                        <img src="images/eyes-map.avif" alt="高标室内地图" style="width: 100%; aspect-ratio: 16/10; object-fit: cover;">
+                    </div>
+                    <div style="min-width: 100%;">
+                        <img src="images/default-map.avif" alt="普通地图" style="width: 100%; aspect-ratio: 16/10; object-fit: cover;">
+                    </div>
+                </div>
+                <div id="indoorMapOverlay" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div id="indoorPulseDot" style="width: 8px; height: 8px; background: #2997ff; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                        <span id="indoorOverlayText" style="font-size: 12px; color: rgba(255, 255, 255, 0.9);">楼层切换显示</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 指示点 -->
+            <div style="display: flex; justify-content: center; gap: 8px; margin-top: 16px;">
+                <div id="indoorDot1" style="width: 8px; height: 8px; border-radius: 50%; background: #2997ff; transition: all 0.3s;"></div>
+                <div id="indoorDot2" style="width: 8px; height: 8px; border-radius: 50%; background: rgba(0, 0, 0, 0.2); transition: all 0.3s;"></div>
+            </div>
+        </div>
+
+        <style>
+            @keyframes pulse {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50% { opacity: 0.5; transform: scale(1.2); }
+            }
+        </style>
+
+        <script>
+            let currentIndoorIndex = 0;
+            const indoorSlider = document.getElementById('indoorMapSlider');
+            const indoorTab1 = document.getElementById('indoorTab1');
+            const indoorTab2 = document.getElementById('indoorTab2');
+            const indoorDot1 = document.getElementById('indoorDot1');
+            const indoorDot2 = document.getElementById('indoorDot2');
+
+            function switchIndoorMap(index) {
+                currentIndoorIndex = index;
+                indoorSlider.style.transform = `translateX(-${index * 100}%)`;
+
+                // 更新标签样式
+                const indoorOverlay = document.getElementById('indoorMapOverlay');
+                if (index === 0) {
+                    indoorTab1.style.background = 'rgba(41, 151, 255, 0.15)';
+                    indoorTab1.style.borderColor = 'rgba(41, 151, 255, 0.3)';
+                    indoorTab1.querySelector('span').style.color = '#2997ff';
+                    indoorTab2.style.background = 'rgba(0, 0, 0, 0.05)';
+                    indoorTab2.style.borderColor = 'rgba(0, 0, 0, 0.1)';
+                    indoorTab2.querySelector('span').style.color = '#666';
+                    indoorDot1.style.background = '#2997ff';
+                    indoorDot2.style.background = 'rgba(0, 0, 0, 0.2)';
+                    // 显示遮罩层
+                    if (indoorOverlay) indoorOverlay.style.display = 'block';
+                } else {
+                    indoorTab2.style.background = 'rgba(41, 151, 255, 0.15)';
+                    indoorTab2.style.borderColor = 'rgba(41, 151, 255, 0.3)';
+                    indoorTab2.querySelector('span').style.color = '#2997ff';
+                    indoorTab1.style.background = 'rgba(0, 0, 0, 0.05)';
+                    indoorTab1.style.borderColor = 'rgba(0, 0, 0, 0.1)';
+                    indoorTab1.querySelector('span').style.color = '#666';
+                    indoorDot2.style.background = '#2997ff';
+                    indoorDot1.style.background = 'rgba(0, 0, 0, 0.2)';
+                    // 隐藏遮罩层
+                    if (indoorOverlay) indoorOverlay.style.display = 'none';
+                }
+            }
+
+            // 自动轮播
+            setInterval(() => {
+                const nextIndex = (currentIndoorIndex + 1) % 2;
+                switchIndoorMap(nextIndex);
+            }, 4000);
+        </script>
+    </section>
+
+    <!-- 新能源充电站 -->
+    <section class="section-card section-card-alt" style="padding: 40px 24px;">
+        <div class="section-header" style="margin-bottom: 24px;">
+            <h2 class="section-title" style="font-size: 24px; margin-bottom: 8px;">新能源充电站</h2>
+            <p class="section-subtitle" style="font-size: 13px;">选址、运营一站式解决方案</p>
+        </div>
+
+        <!-- 图片轮播 -->
+        <div class="charging-carousel" style="margin: 0 16px 16px; position: relative; border-radius: 12px; overflow: hidden; background: transparent;">
+            <div id="chargingSlider" style="display: flex; transition: transform 0.4s ease;">
+                <div style="min-width: 100%; display: flex; align-items: center; justify-content: center; background: transparent;">
+                    <img src="images/charging-1.avif" alt="充电桩选址" style="width: 100%; height: auto; object-fit: contain; display: block;">
+                </div>
+                <div style="min-width: 100%; display: flex; align-items: center; justify-content: center; background: transparent;">
+                    <img src="images/charging-2.avif" alt="充电站运营" style="width: 100%; height: auto; object-fit: contain; display: block;">
+                </div>
+            </div>
+            <!-- 指示点 -->
+            <div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px;">
+                <div id="chargingDot1" onclick="switchCharging(0)" style="width: 6px; height: 6px; border-radius: 50%; background: #22c55e; cursor: pointer; transition: all 0.3s;"></div>
+                <div id="chargingDot2" onclick="switchCharging(1)" style="width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s;"></div>
+            </div>
+        </div>
+
+        <script>
+            let currentChargingIndex = 0;
+            const chargingSlider = document.getElementById('chargingSlider');
+            const chargingDot1 = document.getElementById('chargingDot1');
+            const chargingDot2 = document.getElementById('chargingDot2');
+
+            function switchCharging(index) {
+                currentChargingIndex = index;
+                chargingSlider.style.transform = `translateX(-${index * 100}%)`;
+                if (index === 0) {
+                    chargingDot1.style.background = '#22c55e';
+                    chargingDot2.style.background = 'rgba(255,255,255,0.4)';
+                } else {
+                    chargingDot2.style.background = '#22c55e';
+                    chargingDot1.style.background = 'rgba(255,255,255,0.4)';
+                }
+            }
+
+            // 自动轮播
+            setInterval(() => {
+                const nextIndex = (currentChargingIndex + 1) % 2;
+                switchCharging(nextIndex);
+            }, 4000);
+        </script>
+
+        <div class="charging-features" style="grid-template-columns: 1fr;">
+            <div class="charging-card" style="text-align: left; padding: 20px;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div class="charging-card-icon" style="margin: 0; flex-shrink: 0;">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="charging-card-title" style="font-size: 16px; margin-bottom: 6px;">充电桩选址运营</div>
+                        <div class="charging-card-desc" style="font-size: 12px; line-height: 1.5;">数字驱动 宏观规划 微观选址<br>供需明确,掌握竞争情况智能运营</div>
+                    </div>
+                </div>
+            </div>
+            <div class="charging-card" style="text-align: left; padding: 20px;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div class="charging-card-icon" style="margin: 0; flex-shrink: 0;">
+                        <i data-lucide="zap" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="charging-card-title" style="font-size: 16px; margin-bottom: 6px;">高德e站通</div>
+                        <div class="charging-card-desc" style="font-size: 12px; line-height: 1.5;">充电桩动态信息展示<br>方便消费者找桩,提升充电站盈利</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 标语区 -->
+    <section class="slogan-section">
+        <div class="slogan-content">
+            <div class="slogan-brand">DAFANG</div>
+            <p class="slogan-text">始于信任 · 成于技术</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i data-lucide="map-pin"></i>
+                    <span>北京市朝阳区利泽中园106号楼2层213</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="phone"></i>
+                    <span>131 2116 2261</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="mail"></i>
+                    <span>Dfpublic@dafangyuntu.com</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部导航栏 -->
+    <nav class="fixed bottom-0 left-0 right-0 bottom-nav z-40 pb-safe">
+        <div class="flex items-center justify-around h-16">
+            <a href="index.html" class="nav-item flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="home" class="w-6 h-6"></i>
+                <span class="text-[11px]">首页</span>
+            </a>
+            <a href="smart-travel.html" class="nav-item flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="car" class="w-6 h-6"></i>
+                <span class="text-[11px]">出行</span>
+            </a>
+            <a href="enterprise.html" class="nav-item active flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="building-2" class="w-6 h-6"></i>
+                <span class="text-[11px]">企业</span>
+            </a>
+            <a href="about.html" class="nav-item flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="info" class="w-6 h-6"></i>
+                <span class="text-[11px]">关于</span>
+            </a>
+            <a href="contact.html" class="nav-item flex flex-col items-center gap-1 py-2 px-4">
+                <i data-lucide="phone" class="w-6 h-6"></i>
+                <span class="text-[11px]">联系</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        lucide.createIcons();
+
+        // 菜单控制
+        const menuBtn = document.getElementById('menuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuContent = document.getElementById('menuContent');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const closeMenu = document.getElementById('closeMenu');
+
+        function openMenu() {
+            sideMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => { menuContent.classList.remove('translate-x-full'); }, 10);
+        }
+
+        function closeMenuFn() {
+            menuContent.classList.add('translate-x-full');
+            setTimeout(() => { sideMenu.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeMenu.addEventListener('click', closeMenuFn);
+        menuOverlay.addEventListener('click', closeMenuFn);
+        document.querySelectorAll('#sideMenu a').forEach(link => { link.addEventListener('click', closeMenuFn); });
+
+        // 行业解决方案图片切换
+        function showSolutionHover(index) {
+            const defaultImg = document.getElementById('solutionImg' + index);
+            const hoverImg = document.getElementById('solutionImgHover' + index);
+            if (defaultImg) defaultImg.style.opacity = '0';
+            if (hoverImg) hoverImg.style.opacity = '1';
+        }
+
+        function hideSolutionHover(index) {
+            const defaultImg = document.getElementById('solutionImg' + index);
+            const hoverImg = document.getElementById('solutionImgHover' + index);
+            if (defaultImg) defaultImg.style.opacity = '1';
+            if (hoverImg) hoverImg.style.opacity = '0';
+        }
+
+        // 行业解决方案轮播
+        initSolutionCarousel();
+
+        function initSolutionCarousel() {
+            let currentSlide = 0;
+            let isPaused = false;
+            const track = document.getElementById('solutionCarouselTrack');
+            const container = document.getElementById('solutionCarouselContainer');
+            const dots = document.querySelectorAll('.solution-dot');
+            const totalSlides = 3;
+
+            if (!track || !container) return;
+
+            function goToSlide(index) {
+                currentSlide = index;
+                track.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => goToSlide(index));
+            });
+
+            // 自动轮播
+            const autoPlay = setInterval(() => {
+                if (!isPaused) {
+                    goToSlide((currentSlide + 1) % totalSlides);
+                }
+            }, 5000);
+
+            // 触摸滑动支持
+            let startX = 0;
+            let isDragging = false;
+
+            track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+                isPaused = true;
+            }, { passive: true });
+
+            track.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                const endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0 && currentSlide < totalSlides - 1) {
+                        goToSlide(currentSlide + 1);
+                    } else if (diff < 0 && currentSlide > 0) {
+                        goToSlide(currentSlide - 1);
+                    }
+                }
+                isDragging = false;
+                setTimeout(() => { isPaused = false; }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
