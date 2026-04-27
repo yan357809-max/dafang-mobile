@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" fill="none">
+  <defs>
+    <linearGradient id="goldGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- 右侧麦穗 -->
+  <path d="M20 20 Q60 40 70 80 Q75 100 70 120 Q65 140 50 160 Q40 175 20 190" 
+        stroke="url(#goldGrad2)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- 麦粒 -->
+  <ellipse cx="55" cy="50" rx="8" ry="12" fill="url(#goldGrad2)" transform="rotate(30 55 50)"/>
+  <ellipse cx="62" cy="70" rx="8" ry="12" fill="url(#goldGrad2)" transform="rotate(25 62 70)"/>
+  <ellipse cx="65" cy="95" rx="8" ry="12" fill="url(#goldGrad2)" transform="rotate(20 65 95)"/>
+  <ellipse cx="62" cy="120" rx="8" ry="12" fill="url(#goldGrad2)" transform="rotate(15 62 120)"/>
+  <ellipse cx="52" cy="145" rx="8" ry="12" fill="url(#goldGrad2)" transform="rotate(10 52 145)"/>
+  <ellipse cx="38" cy="168" rx="8" ry="12" fill="url(#goldGrad2)" transform="rotate(5 38 168)"/>
+</svg>

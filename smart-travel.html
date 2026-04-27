@@ -307,16 +307,16 @@
         
         /* ===== 核心优势 ===== */
         .advantages-section {
-            background: linear-gradient(180deg, #f5f5f7 0%, #e8e8ed 100%);
+            background: linear-gradient(180deg, #0a1628 0%, #1a2744 100%);
             padding: 40px 0;
         }
         
         .advantages-section .section-title {
-            color: #1a1a1a;
+            color: #fff;
         }
         
         .advantages-section .section-subtitle {
-            color: #666;
+            color: rgba(255,255,255,0.7);
         }
         
         /* 卡片轮播容器 */
@@ -331,7 +331,7 @@
             transition: transform 0.4s ease;
         }
 
-        /* 卡片样式 - 参考 enterprise.html 方案 */
+        /* 卡片样式 - 新设计 */
         .advantage-slide {
             min-width: 100%;
             padding: 0 4px;
@@ -339,71 +339,100 @@
         }
 
         .advantage-carousel-wrapper .advantage-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 24px 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 28px 24px;
             box-sizing: border-box;
+            backdrop-filter: blur(10px);
         }
         
         /* 卡片头部 */
         .advantage-card .card-header {
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 24px;
         }
         
         .advantage-card .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1a1a1a;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
             margin-bottom: 8px;
             line-height: 1.4;
         }
         
         .advantage-card .card-subtitle {
             font-size: 13px;
-            color: #666;
+            color: rgba(255,255,255,0.6);
             line-height: 1.6;
         }
         
-        /* 数据项 */
-        .data-item {
+        /* 数据项 - 横向排列 */
+        .data-list {
             display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            padding: 16px 0;
-            border-bottom: 1px solid #f5f5f5;
+            gap: 16px;
         }
         
-        .data-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
+        .data-item {
+            flex: 1;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .data-number {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #64b3f4;
             line-height: 1;
+            display: block;
+            margin-bottom: 6px;
         }
         
         .data-number .unit {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             margin-left: 2px;
+            color: #64b3f4;
         }
         
         .data-label {
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
             font-weight: 400;
+            display: block;
         }
         
         /* 认证标签样式 */
+        .cert-list {
+            display: flex;
+            gap: 12px;
+        }
+        
         .cert-item {
-            padding: 16px 0;
-            border-bottom: 1px solid #f5f5f5;
+            flex: 1;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .cert-prefix {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .cert-level {
+            font-size: 32px;
+            font-weight: 700;
+            color: #64b3f4;
+            display: block;
+            line-height: 1;
         }
         
         .cert-item:last-child {
@@ -429,7 +458,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -437,7 +466,7 @@
         .advantage-indicator.active {
             width: 24px;
             border-radius: 4px;
-            background: #2997ff;
+            background: #64b3f4;
         }
         
         /* ===== 合作伙伴 ===== */
@@ -488,23 +517,23 @@
 
         .partner-card {
             flex-shrink: 0;
-            background: #F5F5F9;
-            border: 1px solid #F5F5F9;
-            border-radius: 10px;
+            background: #F8F8F8;
+            border: 1px solid #F8F8F8;
+            border-radius: 8px;
             width: 100px;
-            height: 56px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8px 12px;
-            margin: 0 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            padding: 10px 14px;
+            margin: 0 6px;
         }
 
         .partner-card img {
-            width: 80%;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
             height: auto;
-            max-height: 36px;
             object-fit: contain;
         }
         
@@ -683,7 +712,7 @@
                         </div>
                     </div>
                     <div class="carousel-slide" data-index="2">
-                        <img src="images/cockpit-03.avif" alt="美团车机版" class="carousel-image">
+                        <img src="images/cockpit-03.avif" alt="美团车机版" class="carousel-image" style="object-position: center 60%;">
                         <div class="carousel-content">
                             <div class="carousel-title">美团车机版，语音开启「到店取」「餐厅排位」等功能</div>
                         </div>
@@ -756,7 +785,7 @@
             <!-- 图片描述（图片下方） -->
             <div class="carousel-desc-outside" id="drivingCarouselDesc">
                 <div class="carousel-desc" data-index="0">模拟真实道路环境（如交通流、天气、光照等）<br>构建虚拟驾驶场景，用于测试自动驾驶算法的功能、安全性</div>
-                <div class="carousel-desc" data-index="1" style="display: none;">AI 训练的「基石」。对原始数据（图像、语音、点云等）进行分类、标记和注释<br>生成结构化数据集。标签化提升模型智能</div>
+                <div class="carousel-desc" data-index="1" style="display: none;">对原始数据（图像、语音、点云等）进行分类、标记和注释<br>生成结构化数据集，标签化提升模型智能，是AI 训练的「基石」</div>
             </div>
             <div class="carousel-dots" id="drivingCarouselDots">
                 <div class="carousel-dot active" data-index="0"></div>
@@ -769,7 +798,7 @@
     <section class="advantages-section">
         <div class="section-header">
             <h2 class="section-title">核心优势</h2>
-            <p class="section-subtitle">全面的工程经验 · 交付更快 · 效率更高</p>
+            <p class="section-subtitle">全面的工程经验 · 响应更快 · 高效交付</p>
         </div>
         
         <!-- 卡片轮播 -->
@@ -823,10 +852,10 @@
                         </div>
                         <div class="cert-list">
                             <div class="cert-item">
-                                <span class="cert-name">ASPICE Level 2</span>
+                                <span class="cert-prefix">ASPICE</span><span class="cert-level">Level 2</span>
                             </div>
                             <div class="cert-item">
-                                <span class="cert-name">CMMI Level 3</span>
+                                <span class="cert-prefix">CMMI</span><span class="cert-level">Level 3</span>
                             </div>
                         </div>
                     </div>

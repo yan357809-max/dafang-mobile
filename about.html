@@ -245,20 +245,33 @@
 
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px 16px;
             padding: 0 24px;
         }
         .cert-card {
-            background: #fff;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 10px;
-            padding: 16px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 0 12px;
+        }
+        .cert-card .wheat-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            object-fit: contain;
         }
         .cert-title {
-            font-size: 12px;
+            flex: 1;
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            line-height: 1.4;
+            padding: 0 8px;
+        }
+        .cert-title {
+            font-size: 13px;
             font-weight: 500;
             color: #333;
             line-height: 1.4;
@@ -537,7 +550,7 @@
     <!-- 企业介绍 -->
     <section class="section-card section-card-alt">
         <div class="section-header">
-            <h2 class="section-title">关于 DAFANG</h2>
+            <h2 class="section-title">关于大方云图</h2>
         </div>
 
         <p class="content-text mb-4">
@@ -708,19 +721,55 @@
     <section class="honors-section">
         <div class="section-header">
             <h2 class="section-title">荣誉与资质</h2>
-            <p class="section-subtitle">截止2024年底，共获得荣誉与资质 9 项</p>
+            <p class="section-subtitle">截止2025年底，共获得荣誉与资质 9 项</p>
         </div>
 
         <div class="cert-grid">
-            <div class="cert-card"><div class="cert-title">甲级测绘资质证书</div></div>
-            <div class="cert-card"><div class="cert-title">乙级测绘资质证书</div></div>
-            <div class="cert-card"><div class="cert-title">高新技术企业证书</div></div>
-            <div class="cert-card"><div class="cert-title">信息技术服务管理体系</div></div>
-            <div class="cert-card"><div class="cert-title">信息安全管理体系</div></div>
-            <div class="cert-card"><div class="cert-title">质量管理体系认证</div></div>
-            <div class="cert-card"><div class="cert-title">CMMI证书</div></div>
-            <div class="cert-card"><div class="cert-title">北京市创新型中小企业</div></div>
-            <div class="cert-card"><div class="cert-title">北京市专精特新中小企业</div></div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title" style="white-space: nowrap;">甲级测绘资质证书</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title" style="white-space: nowrap;">乙级测绘资质证书</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title" style="white-space: nowrap;">高新技术企业证书</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title">信息技术服务<br>管理体系</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title" style="white-space: nowrap;">信息安全管理体系</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title" style="white-space: nowrap;">质量管理体系认证</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title" style="white-space: nowrap;">CMMI证书</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title">北京市创新型<br>中小企业</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
+            <div class="cert-card">
+                <img src="images/wheat-left.svg" class="wheat-icon" alt="">
+                <div class="cert-title">北京市专精特新<br>中小企业</div>
+                <img src="images/wheat-right.svg" class="wheat-icon" alt="">
+            </div>
         </div>
     </section>
 

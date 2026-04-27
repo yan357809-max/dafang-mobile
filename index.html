@@ -227,7 +227,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 12px;
+            padding: 16px 12px 0 12px;
             text-decoration: none;
             background-size: cover;
             background-position: center;
@@ -244,37 +244,26 @@
             z-index: 1;
         }
         
-        .tech-number {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            font-size: 12px;
-            color: rgba(255,255,255,0.8);
-            font-weight: 500;
-            z-index: 2;
-            background: rgba(0,0,0,0.5);
-            padding: 4px 10px;
-            border-radius: 12px;
-            backdrop-filter: blur(4px);
-        }
-        
         .tech-content {
             position: relative;
             z-index: 2;
         }
         
         .tech-name {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: white;
-            margin-bottom: 4px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
         }
         
         .tech-name-en {
             font-size: 12px;
             color: rgba(255,255,255,0.9);
             text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            font-weight: 400;
         }
         
         /* ===== 标语区 ===== */
@@ -452,31 +441,23 @@
         </div>
         <div class="tech-grid">
             <a href="about.html" class="tech-item" style="background-image: url('images/tech-01.avif');">
-                <span class="tech-number">01</span>
                 <div class="tech-content">
-                    <div class="tech-name">定位</div>
-                    <div class="tech-name-en">Positioning</div>
+                    <div class="tech-name">定位 <span class="tech-name-en">Positioning</span></div>
                 </div>
             </a>
             <a href="about.html" class="tech-item" style="background-image: url('images/tech-02.avif');">
-                <span class="tech-number">02</span>
                 <div class="tech-content">
-                    <div class="tech-name">导航</div>
-                    <div class="tech-name-en">Navigation</div>
+                    <div class="tech-name">导航 <span class="tech-name-en">Navigation</span></div>
                 </div>
             </a>
             <a href="about.html" class="tech-item" style="background-image: url('images/tech-03.avif');">
-                <span class="tech-number">03</span>
                 <div class="tech-content">
-                    <div class="tech-name">地图</div>
-                    <div class="tech-name-en">Map</div>
+                    <div class="tech-name">地图 <span class="tech-name-en">Map</span></div>
                 </div>
             </a>
             <a href="about.html" class="tech-item" style="background-image: url('images/tech-04.avif');">
-                <span class="tech-number">04</span>
                 <div class="tech-content">
-                    <div class="tech-name">路线</div>
-                    <div class="tech-name-en">Route</div>
+                    <div class="tech-name">路线 <span class="tech-name-en">Route</span></div>
                 </div>
             </a>
         </div>
