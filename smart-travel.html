@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -10,21 +11,24 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * { 
-            -webkit-tap-highlight-color: transparent; 
-            box-sizing: border-box; 
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'MiSans', 'Montserrat', 'Aidian FengYaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             overflow-x: hidden;
             background-color: #000;
             padding-bottom: 80px;
         }
-        
-        ::-webkit-scrollbar { width: 0; height: 0; }
-        
+
+        ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
         /* 顶部导航栏 */
         .nav-bar {
             backdrop-filter: blur(20px);
@@ -32,7 +36,7 @@
             background: rgba(0, 0, 0, 0.6);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         /* Hero 区域 */
         .hero-section {
             position: relative;
@@ -49,26 +53,29 @@
             padding: 100px 24px 60px;
             overflow: hidden;
         }
-        
+
         .hero-section::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.4) 100%);
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 10;
         }
-        
+
         .hero-tag {
             font-size: 14px;
             color: #64b3f4;
             margin-bottom: 16px;
             letter-spacing: 2px;
         }
-        
+
         .hero-title {
             font-size: 32px;
             font-weight: 700;
@@ -77,66 +84,74 @@
             line-height: 1.3;
             letter-spacing: 4px;
         }
-        
+
         .hero-desc {
             font-size: 16px;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
             letter-spacing: 2px;
         }
-        
+
         /* Hero 文字渐显动画 */
         .hero-fade-in {
             opacity: 0;
             transform: translateY(20px);
             animation: heroFadeIn 0.8s ease forwards;
         }
-        
-        .hero-fade-in-delay-1 { animation-delay: 0.2s; }
-        .hero-fade-in-delay-2 { animation-delay: 0.4s; }
-        .hero-fade-in-delay-3 { animation-delay: 0.6s; }
-        
+
+        .hero-fade-in-delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .hero-fade-in-delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .hero-fade-in-delay-3 {
+            animation-delay: 0.6s;
+        }
+
         @keyframes heroFadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         /* 板块标题 */
         .section-header {
             text-align: center;
             margin-bottom: 30px;
             padding: 0 24px;
         }
-        
+
         .section-title {
             font-size: 24px;
             font-weight: 700;
             color: white;
             margin-bottom: 8px;
         }
-        
+
         .section-subtitle {
             font-size: 13px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.5;
             white-space: nowrap;
         }
-        
+
         /* ===== 智能座舱 ===== */
         .cockpit-section {
             background: #f5f7fa;
             padding: 40px 0;
         }
-        
+
         .cockpit-section .section-title {
             color: #1a1a1a;
         }
-        
+
         .cockpit-section .section-subtitle {
             color: #666;
         }
-        
+
         /* 轮播图样式 */
         .carousel-container {
             position: relative;
@@ -144,78 +159,102 @@
             margin: 0 16px;
             border-radius: 0;
         }
-        
+
         .carousel-track {
             display: flex;
             transition: transform 0.3s ease;
         }
-        
+
         .carousel-slide {
             min-width: 100%;
             position: relative;
         }
-        
+
         .carousel-image {
             width: 100%;
             aspect-ratio: 16/10;
             object-fit: cover;
             border-radius: 0;
         }
-        
+
         .carousel-content {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             padding: 40px 20px 16px;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
             border-radius: 0;
         }
-        
+
         .carousel-title {
             font-size: 18px;
             font-weight: 700;
             color: white;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
             line-height: 1.4;
         }
-        
+
         .carousel-desc-outside {
             padding: 16px 20px;
             background: #fff;
             margin: 0 16px;
             border-radius: 0;
             border-top: 1px solid #eee;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        
+
         .carousel-desc {
             font-size: 13px;
             color: #555;
             line-height: 1.6;
         }
-        
+
         .carousel-dots {
             display: flex;
             justify-content: center;
             gap: 8px;
             margin-top: 16px;
         }
-        
+
         .carousel-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(0,0,0,0.2);
-            transition: all 0.3s;
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        
+
         .carousel-dot.active {
             background: #2997ff;
             width: 24px;
             border-radius: 4px;
         }
-        
+
+        /* 核心优势卡片轮播指示点 - 深色背景 */
+        .advantage-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        .advantage-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .advantage-indicator.active {
+            width: 24px;
+            border-radius: 4px;
+            background: #64b3f4;
+        }
+
         /* 子功能列表 */
         .sub-features {
             display: grid;
@@ -223,14 +262,14 @@
             gap: 12px;
             margin: 24px 16px 0;
         }
-        
+
         .sub-feature-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 0;
             padding: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .sub-feature-title {
             font-size: 15px;
             font-weight: 600;
@@ -240,25 +279,25 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .sub-feature-title i {
             width: 18px;
             height: 18px;
             color: #64b3f4;
         }
-        
+
         .sub-feature-items {
             font-size: 12px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.6;
         }
-        
+
         /* ===== 智能驾驶 ===== */
         .driving-section {
             background: #000;
             padding: 40px 0;
         }
-        
+
         .driving-image {
             width: calc(100% - 32px);
             margin: 0 16px;
@@ -266,59 +305,59 @@
             aspect-ratio: 16/9;
             object-fit: cover;
         }
-        
+
         .driving-features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             margin: 24px 16px 0;
         }
-        
+
         .driving-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 0;
             padding: 20px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .driving-card-icon {
             width: 48px;
             height: 48px;
-            background: rgba(100,179,244,0.1);
+            background: rgba(100, 179, 244, 0.1);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 12px;
         }
-        
+
         .driving-card-title {
             font-size: 16px;
             font-weight: 600;
             color: white;
             margin-bottom: 4px;
         }
-        
+
         .driving-card-desc {
             font-size: 12px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
         }
-        
+
         /* ===== 核心优势 ===== */
         .advantages-section {
             background: linear-gradient(180deg, #0a1628 0%, #1a2744 100%);
             padding: 40px 0;
         }
-        
+
         .advantages-section .section-title {
             color: #fff;
         }
-        
+
         .advantages-section .section-subtitle {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
         }
-        
+
         /* 卡片轮播容器 */
         .advantage-carousel-container {
             position: relative;
@@ -339,19 +378,19 @@
         }
 
         .advantage-carousel-wrapper .advantage-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 0;
             padding: 28px 24px;
             box-sizing: border-box;
             backdrop-filter: blur(10px);
         }
-        
+
         /* 卡片头部 */
         .advantage-card .card-header {
             margin-bottom: 24px;
         }
-        
+
         .advantage-card .card-title {
             font-size: 20px;
             font-weight: 700;
@@ -359,28 +398,28 @@
             margin-bottom: 8px;
             line-height: 1.4;
         }
-        
+
         .advantage-card .card-subtitle {
             font-size: 13px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.6;
         }
-        
+
         /* 数据项 - 横向排列 */
         .data-list {
             display: flex;
             gap: 16px;
         }
-        
+
         .data-item {
             flex: 1;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 0;
             padding: 20px 16px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .data-number {
             font-size: 32px;
             font-weight: 700;
@@ -389,44 +428,44 @@
             display: block;
             margin-bottom: 6px;
         }
-        
+
         .data-number .unit {
             font-size: 14px;
             font-weight: 500;
             margin-left: 2px;
             color: #64b3f4;
         }
-        
+
         .data-label {
             font-size: 13px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 400;
             display: block;
         }
-        
+
         /* 认证标签样式 */
         .cert-list {
             display: flex;
             gap: 12px;
         }
-        
+
         .cert-item {
             flex: 1;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 0;
             padding: 20px 16px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .cert-prefix {
             font-size: 14px;
             font-weight: 600;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             display: block;
             margin-bottom: 4px;
         }
-        
+
         .cert-level {
             font-size: 32px;
             font-weight: 700;
@@ -434,18 +473,18 @@
             display: block;
             line-height: 1;
         }
-        
+
         .cert-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
-        
+
         .cert-name {
             font-size: 22px;
             font-weight: 600;
             color: #1a1a1a;
         }
-        
+
         /* 指示器 */
         .advantage-carousel-indicators {
             display: flex;
@@ -453,7 +492,7 @@
             gap: 8px;
             margin-top: 24px;
         }
-        
+
         .advantage-indicator {
             width: 8px;
             height: 8px;
@@ -462,13 +501,13 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        
+
         .advantage-indicator.active {
             width: 24px;
             border-radius: 4px;
             background: #64b3f4;
         }
-        
+
         /* ===== 合作伙伴 ===== */
         .partners-section {
             background: #FFFFFF;
@@ -506,13 +545,23 @@
         }
 
         @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         @keyframes marquee-reverse {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
 
         .partner-card {
@@ -536,7 +585,7 @@
             height: auto;
             object-fit: contain;
         }
-        
+
         /* ===== 标语区 ===== */
         .slogan-section {
             background: #F8F8FF;
@@ -598,7 +647,7 @@
             height: 14px;
             color: #2997ff;
         }
-        
+
         /* 底部导航 */
         .bottom-nav {
             position: fixed;
@@ -610,27 +659,29 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 50;
         }
-        
-        .nav-item { 
-            color: rgba(255,255,255,0.5); 
-            transition: all 0.2s ease; 
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
             text-decoration: none;
         }
-        .nav-item.active { 
-            color: #64b3f4; 
+
+        .nav-item.active {
+            color: #64b3f4;
         }
-        
+
         /* 侧边菜单 */
         .side-menu {
             background: rgba(10, 22, 40, 0.98);
             box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
         }
-        
-        .pb-safe { 
-            padding-bottom: env(safe-area-inset-bottom, 20px); 
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
         }
     </style>
 </head>
+
 <body>
     <!-- 顶部导航栏 -->
     <nav class="fixed top-0 left-0 right-0 z-50 nav-bar">
@@ -648,7 +699,8 @@
     <!-- 侧边菜单 -->
     <div id="sideMenu" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/80" id="menuOverlay"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-72 side-menu transform translate-x-full transition-transform duration-300" id="menuContent">
+        <div class="absolute right-0 top-0 bottom-0 w-72 side-menu transform translate-x-full transition-transform duration-300"
+            id="menuContent">
             <div class="p-4 border-b border-white/10 flex items-center justify-between">
                 <span class="font-semibold text-white">菜单</span>
                 <button id="closeMenu" class="p-2 rounded-lg hover:bg-white/10">
@@ -660,11 +712,13 @@
                     <i data-lucide="home" class="w-5 h-5 text-white"></i>
                     <span class="text-white font-medium">首页</span>
                 </a>
-                <a href="smart-travel.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                <a href="smart-travel.html"
+                    class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
                     <i data-lucide="car" class="w-5 h-5 text-white"></i>
                     <span class="text-white font-medium">智能出行</span>
                 </a>
-                <a href="enterprise.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                <a href="enterprise.html"
+                    class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
                     <i data-lucide="building-2" class="w-5 h-5 text-white"></i>
                     <span class="text-white font-medium">数智企业</span>
                 </a>
@@ -672,7 +726,8 @@
                     <i data-lucide="info" class="w-5 h-5 text-white"></i>
                     <span class="text-white font-medium">关于大方</span>
                 </a>
-                <a href="contact.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
+                <a href="contact.html"
+                    class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
                     <i data-lucide="phone" class="w-5 h-5 text-white"></i>
                     <span class="text-white font-medium">联系我们</span>
                 </a>
@@ -694,7 +749,7 @@
             <h2 class="section-title">智能座舱</h2>
             <p class="section-subtitle">构建沉浸式智能座舱空间，打造融合AI语音视觉互联生态</p>
         </div>
-        
+
         <!-- 轮播图 -->
         <div class="carousel-wrapper">
             <div class="carousel-container" id="carouselContainer">
@@ -712,7 +767,8 @@
                         </div>
                     </div>
                     <div class="carousel-slide" data-index="2">
-                        <img src="images/cockpit-03.avif" alt="美团车机版" class="carousel-image" style="object-position: center 60%;">
+                        <img src="images/cockpit-03.avif" alt="美团车机版" class="carousel-image"
+                            style="object-position: center 60%;">
                         <div class="carousel-content">
                             <div class="carousel-title">美团车机版，语音开启「到店取」「餐厅排位」等功能</div>
                         </div>
@@ -740,10 +796,14 @@
             <!-- 图片描述（图片下方） -->
             <div class="carousel-desc-outside" id="carouselDesc">
                 <div class="carousel-desc" data-index="0">全新 UI 改版，提升视觉识别度<br>布局及交互优化，提升用户体验</div>
-                <div class="carousel-desc" data-index="1" style="display: none;">集成美团、支付宝、麦当劳、马蜂窝等应用，满足多元化出行需求<br>集成音乐等应用，实现有线投屏，愉悦驾乘体验</div>
-                <div class="carousel-desc" data-index="2" style="display: none;">支持点单/取消等指令，自然语义识别（如「我要喝奶茶」）<br>覆盖餐厅取号/查进度等全流程，实时同步排队状态<br>语音交互、解放双手</div>
-                <div class="carousel-desc" data-index="3" style="display: none;">融合大模型，告别「指令式对话」<br>交互更像「真人对话」，顺畅沟通驾驶更安全</div>
-                <div class="carousel-desc" data-index="4" style="display: none;">从界面风格到操作交互，多方位满足客户定制需求<br>支持多种定位模式、智能路线规划、精准导航、路况更新等功能</div>
+                <div class="carousel-desc" data-index="1" style="display: none;">
+                    集成美团、支付宝、麦当劳、马蜂窝等应用，满足多元化出行需求<br>集成音乐等应用，实现有线投屏，愉悦驾乘体验</div>
+                <div class="carousel-desc" data-index="2" style="display: none;">
+                    支持点单/取消等指令，自然语义识别（如「我要喝奶茶」）<br>覆盖餐厅取号/查进度等全流程，实时同步排队状态<br>语音交互、解放双手</div>
+                <div class="carousel-desc" data-index="3" style="display: none;">融合大模型，告别「指令式对话」<br>交互更像「真人对话」，顺畅沟通驾驶更安全
+                </div>
+                <div class="carousel-desc" data-index="4" style="display: none;">
+                    从界面风格到操作交互，多方位满足客户定制需求<br>支持多种定位模式、智能路线规划、精准导航、路况更新等功能</div>
                 <div class="carousel-desc" data-index="5" style="display: none;">提供高德 LITE 版导航，提供乘用车及商务车的多车型适配</div>
             </div>
             <div class="carousel-dots" id="carouselDots">
@@ -763,7 +823,7 @@
             <h2 class="section-title">智能驾驶</h2>
             <p class="section-subtitle">融合感知与决策技术，赋予车辆环境理解与智能驾驶能力</p>
         </div>
-        
+
         <!-- 轮播图 -->
         <div class="carousel-wrapper">
             <div class="carousel-container" id="drivingCarouselContainer">
@@ -785,7 +845,8 @@
             <!-- 图片描述（图片下方） -->
             <div class="carousel-desc-outside" id="drivingCarouselDesc">
                 <div class="carousel-desc" data-index="0">模拟真实道路环境（如交通流、天气、光照等）<br>构建虚拟驾驶场景，用于测试自动驾驶算法的功能、安全性</div>
-                <div class="carousel-desc" data-index="1" style="display: none;">对原始数据（图像、语音、点云等）进行分类、标记和注释<br>生成结构化数据集，标签化提升模型智能，是AI 训练的「基石」</div>
+                <div class="carousel-desc" data-index="1" style="display: none;">
+                    对原始数据（图像、语音、点云等）进行分类、标记和注释<br>生成结构化数据集，标签化提升模型智能，是AI 训练的「基石」</div>
             </div>
             <div class="carousel-dots" id="drivingCarouselDots">
                 <div class="carousel-dot active" data-index="0"></div>
@@ -800,7 +861,7 @@
             <h2 class="section-title">核心优势</h2>
             <p class="section-subtitle">全面的工程经验 · 响应更快 · 高效交付</p>
         </div>
-        
+
         <!-- 卡片轮播 -->
         <div class="advantage-carousel-container">
             <div class="advantage-carousel-wrapper" id="advantageCarouselWrapper">
@@ -871,7 +932,7 @@
         </div>
     </section>
 
-        <!-- 合作伙伴 -->
+    <!-- 合作伙伴 -->
     <section class="partners-section" id="partnersSection">
         <div class="section-header">
             <h2 class="section-title">合作伙伴</h2>
@@ -951,11 +1012,11 @@
                     <i data-lucide="phone"></i>
                     <span>131 2116 2261</span>
                 </div>
-            <div class="contact-item">
-                <i data-lucide="mail"></i>
-                <span>Dfpublic@dafangyuntu.com</span>
+                <div class="contact-item">
+                    <i data-lucide="mail"></i>
+                    <span>Dfpublic@dafangyuntu.com</span>
+                </div>
             </div>
-        </div>
     </section>
 
     <!-- 底部导航栏 -->
@@ -986,39 +1047,39 @@
 
     <script>
         lucide.createIcons();
-        
+
         // 菜单控制
         const menuBtn = document.getElementById('menuBtn');
         const sideMenu = document.getElementById('sideMenu');
         const menuContent = document.getElementById('menuContent');
         const menuOverlay = document.getElementById('menuOverlay');
         const closeMenu = document.getElementById('closeMenu');
-        
+
         function openMenu() {
             sideMenu.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             setTimeout(() => { menuContent.classList.remove('translate-x-full'); }, 10);
         }
-        
+
         function closeMenuFn() {
             menuContent.classList.add('translate-x-full');
             setTimeout(() => { sideMenu.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
         }
-        
+
         menuBtn.addEventListener('click', openMenu);
         closeMenu.addEventListener('click', closeMenuFn);
         menuOverlay.addEventListener('click', closeMenuFn);
         document.querySelectorAll('#sideMenu a').forEach(link => { link.addEventListener('click', closeMenuFn); });
-        
+
         // 智能座舱轮播图
         initCarousel('carouselContainer', 'carouselTrack', 'carouselDots', 'carouselDesc', 6);
-        
+
         // 智能驾驶轮播图
         initCarousel('drivingCarouselContainer', 'drivingCarouselTrack', 'drivingCarouselDots', 'drivingCarouselDesc', 2);
-        
+
         // 核心优势卡片轮播
         initAdvantageCarousel();
-        
+
         // 核心优势卡片轮播初始化
         function initAdvantageCarousel() {
             const wrapper = document.getElementById('advantageCarouselWrapper');
@@ -1041,13 +1102,13 @@
                 // 使用百分比偏移，每张卡片占 100%
                 const offset = index * 100;
                 wrapper.style.transform = `translateX(-${offset}%)`;
-                
+
                 // 更新指示器
                 indicators.forEach((ind, i) => {
                     ind.classList.toggle('active', i === index);
                 });
             }
-            
+
             // 指示器点击
             indicators.forEach(ind => {
                 ind.addEventListener('click', () => {
@@ -1055,31 +1116,31 @@
                     updateCarousel(index);
                 });
             });
-            
+
             // 触摸滑动
             let startX = 0;
             let currentX = 0;
             let isDragging = false;
-            
+
             wrapper.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
                 isDragging = true;
                 wrapper.style.transition = 'none';
             }, { passive: true });
-            
+
             wrapper.addEventListener('touchmove', (e) => {
                 if (!isDragging) return;
                 currentX = e.touches[0].clientX;
             }, { passive: true });
-            
+
             wrapper.addEventListener('touchend', () => {
                 if (!isDragging) return;
                 isDragging = false;
                 wrapper.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                
+
                 const diff = startX - currentX;
                 const threshold = 50;
-                
+
                 if (Math.abs(diff) > threshold) {
                     if (diff > 0 && currentIndex < totalCards - 1) {
                         // 向左滑，下一张
@@ -1095,7 +1156,7 @@
                     updateCarousel(currentIndex);
                 }
             });
-            
+
             // 自动轮播
             let autoPlayInterval;
             function startAutoPlay() {
@@ -1104,26 +1165,26 @@
                     updateCarousel(nextIndex);
                 }, 5000);
             }
-            
+
             function stopAutoPlay() {
                 clearInterval(autoPlayInterval);
             }
-            
+
             // 鼠标悬停/触摸暂停
             wrapper.addEventListener('mouseenter', stopAutoPlay);
             wrapper.addEventListener('mouseleave', startAutoPlay);
             wrapper.addEventListener('touchstart', stopAutoPlay, { passive: true });
-            
+
             // 初始化
             updateCarousel(0);
             startAutoPlay();
-            
+
             // 窗口大小改变时重新计算
             window.addEventListener('resize', () => {
                 updateCarousel(currentIndex);
             });
         }
-        
+
         // 通用轮播初始化函数
         function initCarousel(containerId, trackId, dotsId, descId, totalSlides) {
             let currentSlide = 0;
@@ -1132,9 +1193,9 @@
             const container = document.getElementById(containerId);
             const dots = document.querySelectorAll(`#${dotsId} .carousel-dot`);
             const descs = document.querySelectorAll(`#${descId} .carousel-desc`);
-            
+
             if (!track || !container) return;
-            
+
             function goToSlide(index) {
                 currentSlide = index;
                 track.style.transform = `translateX(-${index * 100}%)`;
@@ -1148,37 +1209,37 @@
                     });
                 }
             }
-            
+
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => goToSlide(index));
             });
-            
+
             // 自动轮播
             const autoPlay = setInterval(() => {
                 if (!isPaused) {
                     goToSlide((currentSlide + 1) % totalSlides);
                 }
             }, 4000);
-            
+
             // 点击暂停/恢复
             container.addEventListener('click', () => {
                 isPaused = !isPaused;
             });
-            
+
             // 触摸滑动支持
             let startX = 0;
             let isDragging = false;
-            
+
             track.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
                 isDragging = true;
             });
-            
+
             track.addEventListener('touchend', (e) => {
                 if (!isDragging) return;
                 const endX = e.changedTouches[0].clientX;
                 const diff = startX - endX;
-                
+
                 if (Math.abs(diff) > 50) {
                     if (diff > 0 && currentSlide < totalSlides - 1) {
                         goToSlide(currentSlide + 1);
@@ -1189,7 +1250,7 @@
                 isDragging = false;
             });
         }
-        
+
         // 合作伙伴点击暂停/恢复
         const partnersSection = document.getElementById('partnersSection');
         if (partnersSection) {
@@ -1200,4 +1261,5 @@
         }
     </script>
 </body>
+
 </html>
