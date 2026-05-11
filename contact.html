@@ -532,7 +532,7 @@
         // ==================== 加载职位列表（接口） ====================
         async function loadJobList() {
             try {
-                const res = await fetch('http://39.98.76.170:9937/tool/getJobList');
+                const res = await fetch('https://dafangyuntu.com/tool/getJobList');
                 const result = await res.json();
                 if (result.code === 200 && Array.isArray(result.data) && result.data.length > 0) {
                     renderJobList(result.data);
@@ -663,7 +663,7 @@
                     fileInput.type = 'file';
                     fileInput.id = 'resumeFileInput';
                     fileInput.style.display = 'none';
-                    fileInput.accept = 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+                    fileInput.accept = 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*';
                     fileInput.addEventListener('change', onFileSelected);
                     document.body.appendChild(fileInput);
                 }
@@ -678,14 +678,19 @@
             const file = e.target.files[0];
             if (!file) return;
 
-            const validTypes = [
+            // 支持的文档类型
+            const docTypes = [
                 'application/pdf',
                 'application/msword',
                 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
             ];
 
-            if (!validTypes.includes(file.type)) {
-                alert('仅支持上传 PDF、Word 格式的简历');
+            // 判断是否合法：文档类型 或 任意图片类型
+            const isDoc = docTypes.includes(file.type);
+            const isImage = file.type.startsWith('image/');
+
+            if (!isDoc && !isImage) {
+                alert('仅支持上传 PDF、Word、图片格式的简历');
                 selectedFile = null;
                 return;
             }
@@ -720,7 +725,7 @@
                 formData.append('file', selectedFile);
                 formData.append('title', currentJob.title);
 
-                const res = await fetch('http://39.98.76.170:9937/tool/sendEMail', {
+                const res = await fetch('https://dafangyuntu.com/tool/sendEMail', {
                     method: 'POST',
                     body: formData
                 });
