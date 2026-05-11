@@ -329,42 +329,42 @@
                         <span class="job-card-title">Android开发</span>
                         <span class="urgent-badge">急招</span>
                     </div>
-                    <div class="job-card-meta">社招 · 5人<br>厦门/北京 · 3-5年</div>
+                    <div class="job-card-meta">社招 · 5人 · 大专及以上<br>厦门/北京 · 3-5年</div>
                 </div>
                 
                 <div class="job-card" onclick="openJobModal('pm')">
                     <div class="job-card-header">
                         <span class="job-card-title">项目管理专员</span>
                     </div>
-                    <div class="job-card-meta">社招 · 2人<br>厦门 · 1-3年</div>
+                    <div class="job-card-meta">社招 · 2人 · 大专及以上<br>厦门 · 1-3年</div>
                 </div>
                 
                 <div class="job-card" onclick="openJobModal('backend')">
                     <div class="job-card-header">
                         <span class="job-card-title">服务端开发</span>
                     </div>
-                    <div class="job-card-meta">社招 · 3人<br>厦门/北京 · 3-10年</div>
+                    <div class="job-card-meta">社招 · 3人 · 本科<br>厦门/北京 · 3-10年</div>
                 </div>
                 
                 <div class="job-card" onclick="openJobModal('thai')">
                     <div class="job-card-header">
                         <span class="job-card-title">泰语实习生</span>
                     </div>
-                    <div class="job-card-meta">实习 · 不限<br>北京 · 本科</div>
+                    <div class="job-card-meta">实习 · 不限 · 本科及以上<br>北京 · 不限</div>
                 </div>
                 
                 <div class="job-card" onclick="openJobModal('rd')">
                     <div class="job-card-header">
                         <span class="job-card-title">研发实习生</span>
                     </div>
-                    <div class="job-card-meta">实习 · 不限<br>北京/厦门 · 本科</div>
+                    <div class="job-card-meta">实习 · 不限 · 本科及以上<br>北京/厦门 · 无</div>
                 </div>
                 
                 <div class="job-card" onclick="openJobModal('pm2')">
                     <div class="job-card-header">
                         <span class="job-card-title">项目经理</span>
                     </div>
-                    <div class="job-card-meta">社招 · 2人<br>北京/厦门 · 3-10年</div>
+                    <div class="job-card-meta">社招 · 2人 · 本科<br>北京/厦门 · 3-10年</div>
                 </div>
             </div>
         </div>
@@ -400,7 +400,7 @@
                 <div class="job-modal-close" onclick="closeJobModal()"><i data-lucide="x" class="w-5 h-5"></i></div>
             </div>
             <div id="modalContent"></div>
-            <button class="job-apply-btn" onclick="alert('请将简历发送至：Dfpublic@dafangyuntu.com')">投递简历</button>
+            <button class="job-apply-btn" id="applyBtn">投递简历</button>
         </div>
     </div>
 
@@ -455,66 +455,305 @@
         menuOverlay.addEventListener('click', closeMenuFn);
         document.querySelectorAll('#sideMenu a').forEach(link => { link.addEventListener('click', closeMenuFn); });
         
+        // ==================== 硬编码职位数据（接口失败时作为 fallback） ====================
         const jobData = {
             android: {
                 title: 'Android开发',
-                duty: ['3年以上Android开发经验，有丰富的项目经验', '熟悉Java、Kotlin等编程语言', '熟悉Android开发框架和常用的第三方库', '精通Android UI设计和优化', '熟悉HTTP、TCP/IP等通信协议', '有导航地图开发经验者优先'],
-                require: ['设计、开发和维护高质量的高德AutoSDK应用程序', '与产品团队和项目经理紧密合作，理解需求并提出技术方案', '参与应用程序的架构设计、代码审查和测试工作', '具备节奏把控和风险识别能力', '负责Android工程的组件化开发']
+                tag: '急招',
+                type: '社招',
+                num: 5,
+                edu: '大专及以上',
+                location: '厦门/北京',
+                years: '3-5年',
+                require: ['3年以上Android开发经验，有丰富的项目经验', '熟悉Java、Kotlin等编程语言', '熟悉Android开发框架和常用的第三方库', '精通Android UI设计和优化', '熟悉HTTP、TCP/IP等通信协议', '有导航地图开发经验者优先'],
+                duties: ['设计、开发和维护高质量的高德AutoSDK应用程序', '与产品团队和项目经理紧密合作，理解需求并提出技术方案', '参与应用程序的架构设计、代码审查和测试工作', '具备节奏把控和风险识别能力', '负责Android工程的组件化开发']
             },
             pm: {
                 title: '项目管理专员',
-                duty: ['专科及以上学历，1-2年项目管理经验', '熟悉软件研发过程管理', '思路清晰，做事有条理', '优秀的沟通能力，能快速融入团队'],
-                require: ['配合项目经理进行项目管理工具迭代', '协助推进业务线的项目管理与流程优化', '协调项目资源，确保按时保质交付', '识别不同阶段项目的关键任务']
+                tag: '',
+                type: '社招',
+                num: 2,
+                edu: '大专及以上',
+                location: '厦门',
+                years: '1-3年',
+                require: ['专科及以上学历，1-2年项目管理经验', '熟悉软件研发过程管理', '思路清晰，做事有条理', '优秀的沟通能力，能快速融入团队'],
+                duties: ['配合项目经理进行项目管理工具迭代', '协助推进业务线的项目管理与流程优化', '协调项目资源，确保按时保质交付', '识别不同阶段项目的关键任务']
             },
             backend: {
                 title: '服务端开发',
-                duty: ['大专及以上学历，3年以上Java开发经验', '熟练掌握SpringBoot、Spring Cloud、Mybatis', '熟悉Mysql、Redis、ES、Kafka等中间件', '具备企业级业务系统开发经验优先'],
-                require: ['负责新能源汽车研发平台的后端开发', '负责已有网站项目的维护和更新', '代码质量规范化，完成细化任务', '与产品经理、设计、前端、测试紧密合作']
+                tag: '',
+                type: '社招',
+                num: 3,
+                edu: '本科',
+                location: '厦门/北京',
+                years: '3-10年',
+                require: ['大专及以上学历，3年以上Java开发经验', '熟练掌握SpringBoot、Spring Cloud、Mybatis', '熟悉Mysql、Redis、ES、Kafka等中间件', '具备企业级业务系统开发经验优先'],
+                duties: ['负责新能源汽车研发平台的后端开发', '负责已有网站项目的维护和更新', '代码质量规范化，完成细化任务', '与产品经理、设计、前端、测试紧密合作']
             },
             thai: {
                 title: '泰语实习生',
-                duty: ['泰语专业或可中文工作的泰国留学生', '英语可作为工作语言者优先', '具有良好的理解和沟通能力', '熟练使用办公软件'],
-                require: ['支持泰国入驻门店的对接、运营工作', '整理分析门店运营数据、给出运营指导意见', '协同同步国际化文案与内容', '泰国入驻门店的互联网推广运营']
+                tag: '',
+                type: '实习',
+                num: 999,
+                edu: '本科及以上',
+                location: '北京',
+                years: '不限',
+                require: ['泰语专业或可中文工作的泰国留学生', '英语可作为工作语言者优先', '具有良好的理解和沟通能力', '熟练使用办公软件'],
+                duties: ['支持泰国入驻门店的对接、运营工作', '整理分析门店运营数据、给出运营指导意见', '协同同步国际化文案与内容', '泰国入驻门店的互联网推广运营']
             },
             rd: {
                 title: '研发实习生',
-                duty: ['软件工程、计算机等相关专业优先', '具备良好的沟通能力', '工作积极、主动性强，具备强烈的责任心', '有一定的组织规划能力'],
-                require: ['精通常用数据结构和算法', '基础扎实，熟悉linux开发环境，Python', '熟悉面向对象概念', '熟悉Linux系统，有golang、python脚本处理经验者更佳']
+                tag: '',
+                type: '实习',
+                num: 999,
+                edu: '本科及以上',
+                location: '北京/厦门',
+                years: '无',
+                require: ['软件工程、计算机等相关专业优先', '具备良好的沟通能力', '工作积极、主动性强，具备强烈的责任心', '有一定的组织规划能力'],
+                duties: ['精通常用数据结构和算法', '基础扎实，熟悉linux开发环境，Python', '熟悉面向对象概念', '熟悉Linux系统，有golang、python脚本处理经验者更佳']
             },
             pm2: {
                 title: '项目经理',
-                duty: ['计算机科学、电子工程或相关领域的本科及以上学历', '具备软件交付类项目管理经验优先', '有车载系统项目的经验者优先', '具备PMP认证或其他相关项目管理资格证书者优先'],
-                require: ['项目规划与执行：制定详细的项目计划', '跨部门协作：与产品管理、研发、测试等部门紧密合作', '质量管理：建立并维护质量保证流程', '风险管理：识别潜在风险，制定应对策略']
+                tag: '',
+                type: '社招',
+                num: 2,
+                edu: '本科',
+                location: '北京/厦门',
+                years: '3-10年',
+                require: ['计算机科学、电子工程或相关领域的本科及以上学历', '具备软件交付类项目管理经验优先', '有车载系统项目的经验者优先', '具备PMP认证或其他相关项目管理资格证书者优先'],
+                duties: ['项目规划与执行：制定详细的项目计划', '跨部门协作：与产品管理、研发、测试等部门紧密合作', '质量管理：建立并维护质量保证流程', '风险管理：识别潜在风险，制定应对策略']
             }
         };
-        
-        function openJobModal(jobId) {
-            const job = jobData[jobId];
+
+        // ==================== 接口交互状态 ====================
+        let currentJob = null;
+        let selectedFile = null;
+
+        // ==================== 加载职位列表（接口） ====================
+        async function loadJobList() {
+            try {
+                const res = await fetch('http://39.98.76.170:9937/tool/getJobList');
+                const result = await res.json();
+                if (result.code === 200 && Array.isArray(result.data) && result.data.length > 0) {
+                    renderJobList(result.data);
+                }
+            } catch (error) {
+                console.error('获取职位列表失败:', error);
+                // 失败时保留 HTML 原有硬编码职位卡片
+            }
+        }
+
+        function renderJobList(jobs) {
+            const grid = document.querySelector('.job-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            jobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.onclick = () => openJobModal(job);
+
+                const header = document.createElement('div');
+                header.className = 'job-card-header';
+
+                const title = document.createElement('span');
+                title.className = 'job-card-title';
+                title.textContent = job.title || '';
+                header.appendChild(title);
+
+                if (job.tag) {
+                    const badge = document.createElement('span');
+                    badge.className = 'urgent-badge';
+                    badge.textContent = job.tag;
+                    header.appendChild(badge);
+                }
+
+                const meta = document.createElement('div');
+                meta.className = 'job-card-meta';
+                const typeText = job.type || '社招';
+                const numText = job.num !== undefined ? job.num + '人' : '';
+                const eduText = job.edu || '';
+                const locationText = job.location || '';
+                const yearsText = job.years || '';
+                meta.innerHTML = `${typeText} · ${numText} · ${eduText}<br>${locationText} · ${yearsText}`;
+
+                card.appendChild(header);
+                card.appendChild(meta);
+                grid.appendChild(card);
+            });
+        }
+
+        // ==================== 弹窗逻辑（兼容字符串 ID 与对象） ====================
+        function openJobModal(jobOrId) {
+            let job;
+            if (typeof jobOrId === 'string') {
+                job = jobData[jobOrId];
+            } else {
+                job = jobOrId;
+            }
             if (!job) return;
-            
-            document.getElementById('modalTitle').textContent = job.title;
-            document.getElementById('modalContent').innerHTML = `
+
+            currentJob = job;
+            selectedFile = null;
+
+            document.getElementById('modalTitle').textContent = job.title || '岗位详情';
+
+            let html = '';
+
+            // 基本信息区域：展示所有字段
+            html += `
                 <div class="job-detail-section">
-                    <div class="job-detail-title">岗位职责</div>
-                    <ul class="job-detail-list">${job.duty.map(item => `<li>• ${item}</li>`).join('')}</ul>
-                </div>
-                <div class="job-detail-section">
-                    <div class="job-detail-title">任职要求</div>
-                    <ul class="job-detail-list">${job.require.map(item => `<li>• ${item}</li>`).join('')}</ul>
+                    <div class="job-detail-title">基本信息</div>
+                    <div style="font-size:14px; color:rgba(255,255,255,0.7); line-height:1.8;">
+                        ${job.type ? `<div>类型：${job.type}</div>` : ''}
+                        ${job.num !== undefined && job.num !== null ? `<div>招聘人数：${job.num}人</div>` : ''}
+                        ${job.edu ? `<div>学历：${job.edu}</div>` : ''}
+                        ${job.years ? `<div>工作年限：${job.years}</div>` : ''}
+                        ${job.location ? `<div>工作地点：${job.location}</div>` : ''}
+                        ${job.tag ? `<div style="color:#ef4444;">标签：${job.tag}</div>` : ''}
+                    </div>
+                </div>`;
+
+            // 岗位职责
+            const duties = job.duties || job.duty || [];
+            if (duties.length) {
+                html += `
+                    <div class="job-detail-section">
+                        <div class="job-detail-title">岗位职责</div>
+                        <ul class="job-detail-list">${duties.map(item => `<li>• ${item}</li>`).join('')}</ul>
+                    </div>`;
+            }
+
+            // 任职要求
+            const requires = job.require || [];
+            if (requires.length) {
+                html += `
+                    <div class="job-detail-section">
+                        <div class="job-detail-title">任职要求</div>
+                        <ul class="job-detail-list">${requires.map(item => `<li>• ${item}</li>`).join('')}</ul>
+                    </div>`;
+            }
+
+            // 文件信息展示区域
+            html += `
+                <div id="fileArea" style="margin-top:16px; display:none;">
+                    <div style="font-size:13px; color:rgba(255,255,255,0.6); margin-bottom:8px;">已选择简历</div>
+                    <div id="fileNameDisplay" style="font-size:14px; color:#fff; word-break:break-all;"></div>
                 </div>
             `;
-            
+
+            document.getElementById('modalContent').innerHTML = html;
+
+            const btn = document.getElementById('applyBtn');
+            btn.textContent = '投递简历';
+            btn.onclick = handleApplyClick;
+
             document.getElementById('jobModal').classList.add('active');
             lucide.createIcons();
         }
-        
+
+        // ==================== 投递交互 ====================
+        function handleApplyClick() {
+            if (!currentJob) return;
+
+            if (!selectedFile) {
+                // 首次点击：唤起文件选择器
+                let fileInput = document.getElementById('resumeFileInput');
+                if (!fileInput) {
+                    fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.id = 'resumeFileInput';
+                    fileInput.style.display = 'none';
+                    fileInput.accept = 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+                    fileInput.addEventListener('change', onFileSelected);
+                    document.body.appendChild(fileInput);
+                }
+                fileInput.click();
+            } else {
+                // 二次点击：确认投递
+                doSubmitResume();
+            }
+        }
+
+        function onFileSelected(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const validTypes = [
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            ];
+
+            if (!validTypes.includes(file.type)) {
+                alert('仅支持上传 PDF、Word 格式的简历');
+                selectedFile = null;
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) {
+                alert('文件大小不能超过 10MB');
+                selectedFile = null;
+                return;
+            }
+
+            selectedFile = file;
+
+            const fileArea = document.getElementById('fileArea');
+            const fileNameDisplay = document.getElementById('fileNameDisplay');
+            if (fileArea) fileArea.style.display = 'block';
+            if (fileNameDisplay) fileNameDisplay.textContent = file.name;
+
+            const btn = document.getElementById('applyBtn');
+            btn.textContent = '确认投递';
+        }
+
+        async function doSubmitResume() {
+            if (!selectedFile || !currentJob) return;
+
+            const btn = document.getElementById('applyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '提交中...';
+            btn.disabled = true;
+
+            try {
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+                formData.append('title', currentJob.title);
+
+                const res = await fetch('http://39.98.76.170:9937/tool/sendEMail', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await res.json();
+
+                if (result.code === 200) {
+                    alert('感谢您的投递，我们会在审核后安排人事专员与您联系');
+                    closeJobModal();
+                } else {
+                    alert(result.msg || result.message || '投递失败，请稍后重试');
+                }
+            } catch (error) {
+                console.error('投递失败:', error);
+                alert('网络错误，请稍后重试');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
         function closeJobModal() {
             document.getElementById('jobModal').classList.remove('active');
+            selectedFile = null;
+            currentJob = null;
         }
-        
+
         document.getElementById('jobModal').addEventListener('click', function(e) {
             if (e.target === this) closeJobModal();
         });
+
+        // ==================== 初始化 ====================
+        loadJobList();
     </script>
 </body>
 </html>
